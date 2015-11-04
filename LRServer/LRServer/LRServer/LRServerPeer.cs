@@ -42,7 +42,7 @@ namespace LRServer
                     {
                         if (operationRequest.Parameters.Count<2)
                         {
-                            OperationResponse response = new OperationResponse(operationRequest.OperationCode) { ReturnCode = (short)ErrorCode.INVALID_PARAMETER, DebugMessage = "Login Fail" };
+                            OperationResponse response = new OperationResponse(operationRequest.OperationCode) { ReturnCode = (short)ErrorCode.INVALID_PARAMETER, DebugMessage = "登录失败！" };
                             this.fiber.Enqueue(() => SendOperationResponse(response, new SendParameters()));
                         }
                         else
@@ -53,12 +53,12 @@ namespace LRServer
                             {
                                 int Ret = 1;
                                 var parameter = new Dictionary<byte, object> { { (byte)LoginResponseCode.RET, Ret }, { (byte)LoginResponseCode.MEMBER_ID, memberID }, { (byte)LoginResponseCode.MEMBER_PW, memberPW }, { (byte)LoginResponseCode.NICK_NAME, "LuoRui" } };
-                                OperationResponse response = new OperationResponse(operationRequest.OperationCode, parameter) { ReturnCode = (short)ErrorCode.OK, DebugMessage = "Login Success" };
+                                OperationResponse response = new OperationResponse(operationRequest.OperationCode, parameter) { ReturnCode = (short)ErrorCode.OK, DebugMessage = "登录成功！" };
                                 this.fiber.Enqueue(() => SendOperationResponse(response, new SendParameters()));
                             }
                             else
                             {
-                                OperationResponse response = new OperationResponse(operationRequest.OperationCode) { ReturnCode = (short)ErrorCode.INVALID_OPERATION, DebugMessage = "Wrong id or password" };
+                                OperationResponse response = new OperationResponse(operationRequest.OperationCode) { ReturnCode = (short)ErrorCode.INVALID_OPERATION, DebugMessage = "账号或密码错误！" };
                                 this.fiber.Enqueue(() => SendOperationResponse(response, new SendParameters()));
                             }
                         }

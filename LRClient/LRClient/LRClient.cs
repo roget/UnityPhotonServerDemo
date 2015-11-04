@@ -42,7 +42,16 @@ namespace LRClient
                         string memberID = Console.ReadLine();
                         Console.WriteLine("\n请输入用户密码：");
                         string memberPW = Console.ReadLine();
+
+                        ////直接使用类传输信息(要报错)
+                        //MemberData md = new MemberData();
+                        //md.MemberID = memberID;
+                        //md.MemberPW = memberPW;
+                        //var parameter = new Dictionary<byte, object> { { (byte)LoginParameterCode.MEMBER_ID, md } };
+
+                        //直接使用Dictionary类型传输信息
                         var parameter = new Dictionary<byte, object>() { { (byte)LoginParameterCode.MEMBER_ID, memberID.Trim() }, { (byte)LoginParameterCode.MEMBER_PW, memberPW.Trim() } };
+
                         this.fiber.Enqueue(() => this.peer.OpCustom((byte)OperationCode.LOGIN, parameter, true));
                         OnLogin = true;
                     }

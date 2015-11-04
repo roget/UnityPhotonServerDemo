@@ -35,12 +35,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ErrorCode.cs" />
+    <Compile Include="MemberData.cs" />
     <Compile Include="OperationCode.cs" />
     <Compile Include="ParameterCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
