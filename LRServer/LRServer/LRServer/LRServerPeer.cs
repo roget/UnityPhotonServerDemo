@@ -3,12 +3,14 @@ using Photon.SocketServer;
 using PhotonHostRuntimeInterfaces;
 using ExitGames.Concurrency.Fibers;
 using LRProtocol;
+using ExitGames.Logging;
 
 namespace LRServer
 {
     public class LRServerPeer : PeerBase
     {
         private readonly IFiber fiber;
+        protected static readonly ILogger Log = LogManager.GetCurrentClassLogger();
 
         public LRServerPeer(IRpcProtocol rpcProtocol, IPhotonPeer nativePeer) : base(rpcProtocol, nativePeer)
         {
@@ -23,6 +25,16 @@ namespace LRServer
 
         protected override void OnOperationRequest(OperationRequest operationRequest, SendParameters sendParameters)
         {
+            //或是Debug模式将传过来的资料全部打印出来以方便体验
+            if(Log.IsDebugEnabled)
+            {
+                Log.Debug("OnOperationRequest取得的资料Key：值");
+                foreach(KeyValuePair<byte,object> item in operationRequest.Parameters)
+                {
+                    Log.DebugFormat(string.Format("{0},{1}", item.Key, item.Value.ToString()));
+                }
+            }
+
             //取得Client端传过来的要求并加以处理
             switch(operationRequest.OperationCode)
             {
